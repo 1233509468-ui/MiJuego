@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>The Future Letter - Mobile & Comic Edition</title>
+    <title>Cyberpunk Heist 2099</title>
     
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
-            background-image: radial-gradient(#ccc 15%, transparent 16%), radial-gradient(#ccc 15%, transparent 16%);
-            background-size: 16px 16px;
-            background-position: 0 0, 8px 8px;
+            background-color: #0b0c10;
+            background-image: radial-gradient(#1f2833 15%, transparent 16%), radial-gradient(#1f2833 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
             font-family: 'Impact', 'Arial Black', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            color: #000;
+            color: #fff;
             user-select: none;
             -webkit-user-select: none;
             box-sizing: border-box;
@@ -28,22 +28,25 @@
             width: 100%;
             max-width: 900px;
             height: 95vh;
-            max-height: 600px;
+            max-height: 650px;
             position: relative;
-            background-color: #fff;
-            border: 5px solid #000;
-            box-shadow: 10px 10px 0px #000;
+            background-color: #151515;
+            border: 5px solid #00ffcc;
+            box-shadow: 0px 0px 20px #00ffcc;
             overflow: hidden;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             transition: background-image 0.3s ease;
             margin: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         #interfaz-superior {
             position: absolute;
-            top: 12px;
+            top: 15px;
             left: 15px;
             right: 15px;
             display: flex;
@@ -53,12 +56,13 @@
         }
 
         .contenedor-barra {
-            background: #fff;
-            border: 3px solid #000;
-            width: 140px;
-            height: 20px;
+            background: #000;
+            border: 3px solid #ff0055;
+            width: 150px;
+            height: 22px;
             transform: skew(-10deg);
             overflow: hidden;
+            box-shadow: 0px 0px 8px #ff0055;
         }
 
         #llenado-barra {
@@ -69,13 +73,14 @@
         }
 
         #marcador-puntos {
-            background: #fffb00;
+            background: #00ffcc;
+            color: #000;
             border: 3px solid #000;
-            padding: 4px 10px;
+            padding: 4px 12px;
             font-size: 16px;
             font-weight: bold;
             transform: skew(-10deg) rotate(2deg);
-            box-shadow: 3px 3px 0px #000;
+            box-shadow: 4px 4px 0px #000;
         }
 
         #onomatopeya {
@@ -83,10 +88,10 @@
             top: 25%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            font-size: 55px;
-            color: #ffea00;
+            font-size: 60px;
+            color: #fffb00;
             -webkit-text-stroke: 2px #000;
-            text-shadow: 4px 4px 0px #000;
+            text-shadow: 4px 4px 0px #ff0055;
             z-index: 40;
             pointer-events: none;
             transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -98,38 +103,37 @@
             left: 4%;
             width: 92%;
             height: 160px;
-            background: rgba(255, 255, 255, 0.96);
-            border: 4px solid #000;
+            background: rgba(11, 12, 16, 0.95);
+            border: 4px solid #ff0055;
             padding: 15px 15px;
             box-sizing: border-box;
             cursor: pointer;
             z-index: 10;
-            box-shadow: 6px 6px 0px #000;
+            box-shadow: 6px 6px 0px #000, 0px 0px 15px rgba(255, 0, 85, 0.4);
             font-family: 'Segoe UI', Arial, sans-serif;
-            overflow-y: auto; /* Permite scroll si el texto es largo en pantallas chicas */
         }
 
         #nombre-personaje {
             font-family: 'Impact', sans-serif;
             font-size: 18px;
             text-transform: uppercase;
-            color: #fff;
-            background: #ff5500;
+            color: #000;
+            background: #00ffcc;
             border: 3px solid #000;
-            padding: 2px 8px;
+            padding: 2px 10px;
             display: inline-block;
             position: absolute;
             top: -20px;
             left: 15px;
-            transform: rotate(-3deg);
-            box-shadow: 2px 2px 0px #000;
+            transform: rotate(-2deg);
+            box-shadow: 3px 3px 0px #000;
         }
 
         #texto-dialogo {
             font-size: 15px;
-            line-height: 1.35;
+            line-height: 1.4;
             font-weight: bold;
-            color: #111;
+            color: #fff;
             margin-top: 8px;
         }
 
@@ -140,41 +144,45 @@
             transform: translate(-50%, -50%);
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            width: 80%; /* Más ancho en móviles para tocar fácil */
+            gap: 12px;
+            width: 80%;
             z-index: 20;
         }
 
         .boton-decision {
-            background: #00e5ff;
-            color: #000;
-            border: 3px solid #000;
+            background: #1f2833;
+            color: #00ffcc;
+            border: 3px solid #00ffcc;
             padding: 12px 8px;
             font-size: 15px;
             font-family: 'Impact', sans-serif;
             text-align: center;
             cursor: pointer;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             box-shadow: 4px 4px 0px #000;
             transform: skew(-5deg);
             transition: all 0.1s ease;
-            -webkit-tap-highlight-color: transparent; /* Quita el cuadro feo azul al tocar en móvil */
+            -webkit-tap-highlight-color: transparent;
         }
 
         .boton-decision:hover, .boton-decision:active {
-            background: #fffb00;
+            background: #00ffcc;
+            color: #000;
             transform: skew(-5deg) scale(1.02);
             box-shadow: 5px 5px 0px #000;
         }
 
         .boton-salir {
-            background: #ff4d4d !important;
+            background: #ff0055 !important;
             color: white !important;
+            border-color: #000 !important;
+        }
+        .boton-salir:hover, .boton-salir:active {
+            background: #b3003b !important;
         }
 
-        /* Ajustes específicos para pantallas muy pequeñas de celular */
         @media (max-width: 480px) {
-            #onomatopeya { font-size: 40px; }
+            #onomatopeya { font-size: 45px; }
             #caja-texto { height: 170px; bottom: 10px; }
             #texto-dialogo { font-size: 14px; }
             #contenedor-opciones { width: 85%; top: 42%; }
@@ -185,23 +193,23 @@
 <body>
 
     <div id="pantalla-juego">
-        <div id="onomatopeya">¡BOOM!</div>
+        <div id="onomatopeya">ALERT!</div>
 
         <div id="interfaz-superior">
             <div>
-                <span style="font-size: 11px; font-weight: bold; color: #fff; background: #000; padding: 1px 4px; display:block; margin-bottom:2px;">HP</span>
+                <span style="font-size: 11px; font-weight: bold; color: #ff0055; display:block; margin-bottom:2px;">DATA LINK / HP</span>
                 <div class="contenedor-barra">
                     <div id="llenado-barra"></div>
                 </div>
             </div>
-            <div id="marcador-puntos">TESORO: 0%</div>
+            <div id="marcador-puntos">DATA STOLEN: 0%</div>
         </div>
 
         <div id="contenedor-opciones"></div>
 
         <div id="caja-texto" onclick="avanzarJuego()">
-            <div id="nombre-personaje">NARRADOR</div>
-            <div id="texto-dialogo">Cargando viñetas...</div>
+            <div id="nombre-personaje">SYSTEM</div>
+            <div id="texto-dialogo">Initializing neural link...</div>
         </div>
     </div>
 
@@ -212,133 +220,133 @@
 
         const historia = {
             inicio: {
-                personaje: "VIÑETA 1",
-                texto: "¡BUM! Abres un viejo casillero abandonado y un artefacto proyecta un holograma brillante. Es una CARTA DEL FUTURO firmada en el año 2080. El texto parpadea mezclando idiomas...",
-                imagen: "imagenes/holograma.jpg",
-                siguiente: "carta_lectura_1"
+                personaje: "PANEL 1",
+                texto: "Year 2099. Neon lights glitch outside. You have successfully bypassed the main gate of Cyber-Corp. Your mission: Download the top-secret Quantum AI Prototype.",
+                imagen: "imagenes/neon_city.png",
+                siguiente: "mission_brief"
             },
-            carta_lectura_1: {
-                personaje: "CARTA DEL 2080",
-                texto: "'¡Hola antepasado! Si estás leyendo esto, el tesoro de la humanidad (la clave de la energía limpia) está oculto en tu época. Para encontrar las coordenadas, debes descifrar mis pistas bilingües...'",
-                imagen: "imagenes/holograma.jpg",
-                siguiente: "desafio_1"
+            mission_brief: {
+                personaje: "NEURAL LINK",
+                texto: "Your operator whispers through your cybernetic ear: 'The mainframe is guarded by a level-3 security barrier. You must solve the overrides in perfect English to remain undetected.'",
+                imagen: "imagenes/cyber_deck.png",
+                siguiente: "hack_1"
             },
-            desafio_1: {
-                personaje: "ACERTIJO DE LA CARTA",
-                texto: "'Pista 1: El mapa te guiará al cofre solo si entiendes este mensaje: Look at the sky, I am where the sun sets. ¿Hacia dónde debes caminar según la carta?'",
-                imagen: "imagenes/holograma.jpg",
-                onomatopeya: "¡CLICK!",
+            hack_1: {
+                personaje: "SECURITY GATE 01",
+                texto: "The terminal blinks red: 'IDENTIFICATION REQUIRED. Select the grammatically correct sentence to access the internal server corridor.'",
+                imagen: "imagenes/security_gate.png",
+                onomatopeya: "BEEP!",
                 opciones: [
-                    { texto: "Hacia el Norte (North)", destino: "error_1" },
-                    { texto: "Hacia el Este donde sale el sol (East)", destino: "error_1" },
-                    { texto: "Hacia el Oeste donde se oculta el sol (West)", destino: "ok_1" }
+                    { texto: "She don't have the security key.", destino: "error_1" },
+                    { texto: "She doesn't have the security key.", destino: "ok_1" },
+                    { texto: "She hasn't the security key.", destino: "error_1" }
                 ]
             },
             error_1: {
-                personaje: "VIÑETA DE FALLO",
-                texto: "¡ZAP! Caminas en la dirección equivocada. Una trampa oculta se activa y te golpea, haciéndote perder tiempo y energía.",
-                imagen: "imagenes/bunker.jpg",
-                onomatopeya: "¡ZAP!",
+                personaje: "ALARM SYSTEM",
+                texto: "ACCESS DENIED! The server runs a counter-hack sequence. A neuro-shock hits your brain rig, lowering your firewall link!",
+                imagen: "imagenes/alarm.png",
+                onomatopeya: "SHOCK!",
                 restarEnergia: 25,
-                siguiente: "desafio_1"
+                siguiente: "hack_1"
             },
             ok_1: {
-                personaje: "VIÑETA 2",
-                texto: "¡Exacto! 'Where the sun sets' significa donde el sol se oculta, es decir, el Oeste (West). Sigues caminando y el mapa de la carta se actualiza. ¡Te adentras en el viejo búnker!",
-                imagen: "imagenes/bunker.jpg",
-                onomatopeya: "¡BIEN!",
+                personaje: "PANEL 2",
+                texto: "ACCESS GRANTED! 'Doesn't' is correct for third-person singular negation. The heavy blast doors slide open silently. You run inside the cold server room.",
+                imagen: "imagenes/server_room.png",
+                onomatopeya: "ACCESS!",
                 puntosSumar: 25,
-                siguiente: "capitulo_2"
+                siguiente: "corridor_run"
             },
-            capitulo_2: {
-                personaje: "VIÑETA 3",
-                texto: "Llegas a las coordenadas de la carta: un viejo sótano industrial. En el centro hay un guardián robótico oxidado custodiando la cápsula del tesoro. La carta del futuro te advierte qué decir.",
-                imagen: "imagenes/robot.jpg",
-                siguiente: "desafio_2"
+            corridor_run: {
+                personaje: "PANEL 3",
+                texto: "You pull out your fiber-optic cable and plug directly into the AI core capsule. The download begins, but an elite corporate cyborg guard walks into the room!",
+                imagen: "imagenes/cyborg_guard.png",
+                siguiente: "hack_2"
             },
-            desafio_2: {
-                personaje: "CARTA DEL 2080",
-                texto: "'Pista 2: Para apagar el robot debes usar la orden cortés en pasado. Completa la frase: Yesterday, I ________ (deactivate) the defense protocol'.",
-                imagen: "imagenes/robot.jpg",
-                onomatopeya: "¡RUN!",
+            hack_2: {
+                personaje: "CYBER COMBAT",
+                texto: "Quick! You need to overload the guard's neural optical visor. Choose the past tense form of the verb 'CHOOSE' to upload the blinding virus code.",
+                imagen: "imagenes/cyborg_guard.png",
+                onomatopeya: "WARNING!",
                 opciones: [
-                    { texto: "deactivated", destino: "ok_2" },
-                    { texto: "deactivates", destino: "error_2" },
-                    { texto: "deactivating", destino: "error_2" }
+                    { texto: "I choosed the glitch exploit.", destino: "error_2" },
+                    { texto: "I chosen the glitch exploit.", destino: "error_2" },
+                    { texto: "I chose the glitch exploit.", destino: "ok_2" }
                 ]
             },
             error_2: {
-                personaje: "SISTEMA ROBÓTICO",
-                texto: "¡PUM! Comando inválido. El robot se defiende lanzando una ráfaga de vapor caliente hacia ti.",
-                imagen: "imagenes/robot.jpg",
-                onomatopeya: "¡POW!",
+                personaje: "GUARD COUNTER",
+                texto: "SYNTAX ERROR! The virus fails. The cyborg guard spots you and fires an electric net weapon directly at your chest!",
+                imagen: "imagenes/cyborg_guard.png",
+                onomatopeya: "ZAP!",
                 restarEnergia: 25,
-                siguiente: "desafio_2"
+                siguiente: "hack_2"
             },
             ok_2: {
-                personaje: "VIÑETA 4",
-                texto: "¡LOGRADO! 'Deactivated' es el pasado correcto. El robot parpadea, dobla sus rodillas mecánicas y entra en modo suspensión. ¡La cápsula está al descubierto!",
-                imagen: "imagenes/robot.jpg",
-                onomatopeya: "¡ZAS!",
+                personaje: "PANEL 4",
+                texto: "CRITICAL HIT! 'Chose' is the correct simple past form of 'choose'. The guard's eyes spark violently as his visor overloads. He collapses to the floor!",
+                imagen: "imagenes/cyborg_disabled.png",
+                onomatopeya: "BOOM!",
                 puntosSumar: 35,
-                siguiente: "capitulo_3"
+                siguiente: "final_escape"
             },
-            capitulo_3: {
-                personaje: "VIÑETA 5",
-                texto: "Estás frente al cofre metálico del futuro. Tiene una pantalla táctil donde debes escribir la palabra clave final en inglés basada en la última advertencia de la carta.",
-                imagen: "imagenes/cofre.jpg",
-                siguiente: "desafio_3"
+            final_escape: {
+                personaje: "PANEL 5",
+                texto: "The download bar reaches 99%. A final prompt pops up on the screen: 'To finalize data encryption, input the word that means: A digital program that mimics human intelligence.'",
+                imagen: "imagenes/ai_core.png",
+                siguiente: "hack_3"
             },
-            desafio_3: {
-                personaje: "ÚLTIMA PISTA",
-                texto: "'Pista final: El tesoro no es oro ni joyas. El verdadero tesoro del futuro es algo que adquieres cuando estudias y lees mucho. It starts with 'K' and ends with 'E': KNOWLEDGE. ¿Qué significa?'",
-                imagen: "imagenes/cofre.jpg",
-                onomatopeya: "¡PIENSA!",
+            hack_3: {
+                personaje: "ENCRYPTION CORE",
+                texto: "The system is locking down in 5 seconds. What is the correct term for this technology?",
+                imagen: "imagenes/ai_core.png",
+                onomatopeya: "HURRY!",
                 opciones: [
-                    { texto: "Dinero / Riqueza", destino: "error_3" },
-                    { texto: "Conocimiento / Sabiduría", destino: "ok_3" },
-                    { texto: "Poder / Fuerza", destino: "error_3" }
+                    { texto: "Hardware Device", destino: "error_3" },
+                    { texto: "Artificial Intelligence", destino: "ok_3" },
+                    { texto: "Network Firewall", destino: "error_3" }
                 ]
             },
             error_3: {
-                personaje: "CANDADO LÁSER",
-                texto: "¡CRASH! Código incorrecto. Los sistemas bloquean la tapa del cofre y te dan una fuerte descarga electrostática.",
-                imagen: "imagenes/cofre.jpg",
-                onomatopeya: "¡BOOM!",
+                personaje: "SYSTEM LOCK",
+                texto: "WRONG DECRYPTION CODE! The core initiates a cryogenic purge blast. The extreme cold freezes your terminal connection.",
+                imagen: "imagenes/ai_core.png",
+                onomatopeya: "FREEZE!",
                 restarEnergia: 30,
-                siguiente: "desafio_3"
+                siguiente: "hack_3"
             },
             ok_3: {
-                personaje: "VIÑETA FINAL",
-                texto: "¡SÍ! 'Knowledge' significa conocimiento. La carta del futuro tenía razón: aprender es la mayor riqueza. La compuerta se abre liberando un destello cegador.",
-                imagen: "imagenes/cofre.jpg",
-                onomatopeya: "¡SUCCESS!",
+                personaje: "FINAL PANEL",
+                texto: "SUCCESS! Artificial Intelligence (AI) accepted. The digital core unlocks completely. The prototype data stream flows smoothly into your neural memory drive.",
+                imagen: "imagenes/data_secured.png",
+                onomatopeya: "100%!",
                 puntosSumar: 40,
                 siguiente: "victoria"
             },
             victoria: {
-                personaje: "¡FIN DE LA HISTORIETA!",
-                texto: "¡FANTÁSTICO! El cofre contiene planos mecánicos para salvar el medio ambiente y un mensaje final: '¡Lo lograste, tu inglés salvó al mundo!'. Has completado la novela gráfica bilingüe al 100%. ¿Quieres jugar de nuevo?",
-                imagen: "imagenes/cofre.jpg",
-                onomatopeya: "¡WINNER!",
+                personaje: "MISSION ACCOMPLISHED!",
+                texto: "INCREDIBLE! You jump out of the window into your hover-car just as security teams storm the room. The data is secure, and you are officially the best hacker in Neo-City. Play again?",
+                imagen: "imagenes/hover_car.png",
+                onomatopeya: "VICTORY!",
                 opciones: [
-                    { texto: "¡SÍ, JUGAR DE NUEVO! (RESTART)", destino: "reiniciar" },
-                    { texto: "NO, SALIR DEL JUEGO (EXIT)", destino: "pantalla_negra", claseEspecial: "boton-salir" }
+                    { texto: "YES, START NEW RUN (RESTART)", destino: "reiniciar" },
+                    { texto: "NO, DISCONNECT LINK (EXIT)", destino: "pantalla_negra", claseEspecial: "boton-salir" }
                 ]
             },
             game_over: {
-                personaje: "¡FIN DE LA EDICIÓN!",
-                texto: "¡CRASH! Tu energía llegó a cero. Te desmayaste antes de abrir el cofre y la carta holográfica se apagó para siempre. ¿Quieres reintentar la misión?",
-                imagen: "imagenes/gameover.jpg",
-                onomatopeya: "¡FAIL!",
+                personaje: "LINK SEVERED!",
+                texto: "CRASH! Your neural firewall dropped to 0%. The corporate security systems wiped your memory rig, and you were captured by Cyber-Corp forces. Try again, runner?",
+                imagen: "imagenes/gameover_cyber.png",
+                onomatopeya: "FLATLINED!",
                 opciones: [
-                    { texto: "SÍ, INTENTAR DE NUEVO (RETRY)", destino: "reiniciar" },
-                    { texto: "NO, SALIR DEL JUEGO (EXIT)", destino: "pantalla_negra", claseEspecial: "boton-salir" }
+                    { texto: "YES, RETRY SYSTEM HACK", destino: "reiniciar" },
+                    { texto: "NO, ABORT MISSION", destino: "pantalla_negra", claseEspecial: "boton-salir" }
                 ]
             },
             pantalla_negra: {
-                personaje: "HISTORIETA CERRADA",
-                texto: "Gracias por jugar 'The Future Letter'. La transmisión desde el 2080 se ha cortado permanentemente. Puedes cerrar esta pestaña.",
+                personaje: "SYSTEM OFFLINE",
+                texto: "Thank you for playing 'Cyberpunk Heist 2099'. Connection terminated successfully. You can now close this browser tab.",
                 imagen: "",
                 colorFondo: "#000000"
             }
@@ -384,7 +392,7 @@
                 }
             }
 
-            document.getElementById("marcador-puntos").innerText = `TESORO: ${progresoTesoro}%`;
+            document.getElementById("marcador-puntos").innerText = `DATA STOLEN: ${progresoTesoro}%`;
             document.getElementById("llenado-barra").style.width = `${energia}%`;
 
             document.getElementById("nombre-personaje").innerText = datosEscena.personaje;
